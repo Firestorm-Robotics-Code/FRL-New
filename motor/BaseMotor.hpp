@@ -198,6 +198,12 @@ struct BaseMotor {
     }
 };
 
+void Motor_printWarning(std::string war) {
+    std::cout << "**************************   MOTOR WARNING   **************************" << std::endl;
+    std::cout << war << std::endl;
+    std::cout << "***********************************************************************" << std::endl;
+}
+
 /*std::vector<BaseMotor*> motorWatchlist;
 std::vector<Timer*> timeouts;
 
