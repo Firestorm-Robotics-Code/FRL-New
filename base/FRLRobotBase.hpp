@@ -20,6 +20,7 @@ concept ModeType = requires(T t) {
 
 template <ModeType TeleopMode, ModeType AutoMode, ModeType TestMode, ModeType DisabledMode>
 class FRLRobotBase : public frc::RobotBase {
+public:
     std::atomic<bool> m_exit = false;
 
     TeleopMode* teleop = new TeleopMode;
