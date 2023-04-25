@@ -8,13 +8,15 @@ try:
         try:
             if not os.path.exists("src/main/include/frl/base"):
                 os.system("mkdir src/main/include/frl > /dev/null 2>&1")
+                os.system("git clone https://github.com/Firestorm-Robotics-Code/FRL-New src/main/include/frl > /dev/null 2>&1")
         except:
             print("Error adding a new directory! Make sure that the path 'src/main/include' exists. Installing FRL will not work unless it does.")
     
         if os.path.exists("src/main/include/frl"):
             try:
-                os.system("rm -rf src/main/include/frl")
-                os.system("git clone https://github.com/Firestorm-Robotics-Code/FRL-New src/main/include/frl > /dev/null 2>&1")
+                #os.system("git add src/main/include/frl > /dev/null 2>&1")
+                #os.system("git clone https://github.com/Firestorm-Robotics-Code/FRL-New src/main/include/frl > /dev/null 2>&1")
+                os.system("git pull origin main > /dev/null 2>&1")
             except:
                 print("Unable to install FRL! Internet connection required!")
 
