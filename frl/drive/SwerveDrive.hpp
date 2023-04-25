@@ -103,7 +103,7 @@ public:
         linkSwerve = link;
     }
 
-    void TranslationDrive(float x, float y, int heading) {
+    void TranslationDrive(float x, float y, int heading = 0) {
         Vector add {x, y};
         add.setAngAndMag(toRadians(smartLoop(toDegrees(apply.angle()) - 90 + heading, 360)), apply.magnitude());
         apply += add;

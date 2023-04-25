@@ -18,13 +18,11 @@ public:
     SparkMaxMotor(int id) : BaseMotor(id) {
         spark = new rev::CANSparkMax {id, rev::CANSparkMax::MotorType::kBrushless};
         controls = new _sparkMaxControls{spark -> GetEncoder(), spark -> GetPIDController()};
-        Motor_addToWatchlist(this);
         motorType = SPARK;
     }
     ~SparkMaxMotor() {
         delete spark;
         delete controls;
-        Motor_removeFromWatchlist(this);
     }
 
     void SetPercent(double perc) {

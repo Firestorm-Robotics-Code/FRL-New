@@ -7,13 +7,11 @@ class TalonSRXMotor : public BaseMotor {
 public:
     TalonSRXMotor(int id) : BaseMotor(id) {
         talon = new TalonSRX {id};
-        Motor_addToWatchlist(this);
         motorType = TALONSRX;
     }
 
     ~TalonSRXMotor() {
         delete talon;
-        Motor_removeFromWatchlist(this);
     }
 
     void SetPercent(double perc) {

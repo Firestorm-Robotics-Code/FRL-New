@@ -8,13 +8,11 @@ class TalonFXMotor {
 public:
     TalonFXMotor(int id) : BaseMotor(id) {
         talon = new TalonFX {id};
-        Motor_addToWatchlist(this);
         motorType = TALONFX;
     }
 
     ~TalonFXMotor() {
         delete talon;
-        Motor_removeFromWatchlist(this);
     }
 
     void SetPercent(double perc) {
