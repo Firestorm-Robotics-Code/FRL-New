@@ -11,7 +11,7 @@
 
 #include <iostream>
 #include <vector>
-#include <frl-reprogrammed/util/Timer.hpp>
+#include <frl/util/Timer.hpp>
 
 /**
   * An enum for idle modes

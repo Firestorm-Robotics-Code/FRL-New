@@ -1,7 +1,7 @@
 #pragma once
 
 #include <cmath>
-#include <frl-reprogrammed/util/Functions.hpp>
+#include <frl/util/Functions.hpp>
 
 #define PI 3.1415926
 

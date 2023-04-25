@@ -4,8 +4,8 @@
 #pragma once
 
 #include <ctre/Phoenix.h>
-#include <frl-reprogrammed/motor/PIDController.hpp>
-#include <frl-reprogrammed/util/Vector.hpp>
+#include <frl/motor/PIDController.hpp>
+#include <frl/util/Vector.hpp>
 
 struct SwerveConfig {
     BaseMotor* speed;
