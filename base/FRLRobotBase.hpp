@@ -10,32 +10,45 @@
 #include <frc/internal/DriverStationModeThread.h>
 #include <frc/DriverStation.h>
 
-template <typename T>
-concept ModeType = requires(T t) {
-    t.Init();
-    t.Begin();
-    t.Loop();
-    t.End();
+struct RobotMode {
+    virtual void Init() {
+
+    }
+    virtual void Begin() {
+
+    }
+    virtual void Loop() {
+
+    }
+    virtual void Thread() {
+
+    }
+    virtual void End() {
+
+    }
 };
+
+template <typename T>
+concept ModeType = std::is_base_of<RobotMode, T>::value;
 
 template <ModeType TeleopMode, ModeType AutoMode, ModeType TestMode, ModeType DisabledMode>
 class FRLRobotBase : public frc::RobotBase {
 public:
     std::atomic<bool> m_exit = false;
 
-    TeleopMode* teleop = new TeleopMode;
+    TeleopMode teleop;// = new TeleopMode;
 
-    AutoMode* autonomous = new AutoMode;
+    AutoMode autonomous;// = new AutoMode;
 
-    TestMode* test = new TestMode;
+    TestMode test;// = new TestMode;
 
-    DisabledMode* disabled = new DisabledMode;
+    DisabledMode disabled;// = new DisabledMode;
 
-    void* current = 0;
+    RobotMode* current = 0;
 
     frc::internal::DriverStationModeThread modeThread;
 
-    void setMode(void* mode) {
+    void setMode(RobotMode* mode) {
         if (mode != current) {
             current -> End();
             mode -> Begin();
@@ -43,19 +56,20 @@ public:
         }
     }
 
-    void* getActiveMode() {
+    RobotMode* getActiveMode() {
         if (IsTeleop()) {
-            return teleop;
+            return &teleop;
         }
         if (IsAutonomous()) {
-            return autonomous;
+            return &autonomous;
         }
         if (IsTest()) {
-            return test;
+            return &test;
         }
         if (IsDisabled()) {
-            return disabled;
+            return &disabled;
         }
+        return 0;
     }
 
     void StartCompetition() {
@@ -64,10 +78,10 @@ public:
 
         HAL_ObserveUserProgramStarting();
 
-        teleop -> Init();
-        autonomous -> Init();
-        test -> Init();
-        disabled -> Init();
+        teleop.Init();
+        autonomous.Init();
+        test.Init();
+        disabled.Init();
 
         while (!m_exit) {
             modeThread.InTeleop(IsTeleop());
