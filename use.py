@@ -14,9 +14,9 @@ try:
     
         if os.path.exists("src/main/include/frl"):
             try:
-                #os.system("git add src/main/include/frl > /dev/null 2>&1")
+                os.system("git add src/main/include/frl")
                 #os.system("git clone https://github.com/Firestorm-Robotics-Code/FRL-New src/main/include/frl > /dev/null 2>&1")
-                os.system("git pull origin main > /dev/null 2>&1")
+                os.system("git pull origin main")
             except:
                 print("Unable to install FRL! Internet connection required!")
 
